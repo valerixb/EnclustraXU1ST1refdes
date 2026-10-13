@@ -1,0 +1,6 @@
+&sdhci1 {
+    no-1-8-v;
+    disable-wp;
+    broken-mmc-highspeed;
+    broken-cd;
+};
