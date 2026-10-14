@@ -1,0 +1,29 @@
+FILESEXTRAPATHS:prepend := "${THISDIR}/files/common:"
+
+FILESEXTRAPATHS:prepend:zynqmp-generic := "${THISDIR}/files/zynqmp:"
+FILESEXTRAPATHS:prepend:zynq-generic := "${THISDIR}/files/zynq:"
+
+ENCLUSTRA_BOOTMODE := "sd"
+ENCLUSTRA_BOOTMODE:enclustra-qspi := "qspi"
+ENCLUSTRA_BOOTMODE:enclustra-emmc := "emmc"
+
+FILESEXTRAPATHS:prepend:zynqmp-generic := "${THISDIR}/files/zynqmp/${ENCLUSTRA_BOOTMODE}:"
+FILESEXTRAPATHS:prepend:zynq-generic := "${THISDIR}/files/zynq/${ENCLUSTRA_BOOTMODE}:"
+
+## common
+SRC_URI:append = " file://0008-new2025p2-Enclustra-MAC-address-readout-from-EEPROM.patch"
+SRC_URI:append = " file://0050-new2025p2-update-ksz9131-driver.patch"
+SRC_URI:append = " file://u-boot.cfg"
+
+## specific
+SRC_URI:append:zynqmp-generic = " file://0010-new2025p2-Enclustra-Zynqmp-Board-Patch.patch"
+SRC_URI:append:zynqmp-generic = " file://sf_default_speed_50mhz.cfg"
+SRC_URI:remove:xu61-module = " file://sf_default_speed_50mhz.cfg"
+SRC_URI:append:xu61-module = " file://sf_default_speed_40mhz.cfg"
+SRC_URI:append:zynq-generic = " file://0010-Enclustra-Zynq-Board-Patch.patch"
+SRC_URI:append:zynq-generic = " file://sf_default_speed_50mhz.cfg"
+SRC_URI:append:zx1-module = " file://u-boot-nand.cfg"
+SRC_URI:append:zx3-module = " file://u-boot-nand.cfg"
+SRC_URI:append:zx5-module = " file://u-boot-nand.cfg"
+SRC_URI:append:enclustra-qspi:qspi-64-mbytes = " file://qspi-64-mbytes.cfg"
+SRC_URI:append:enclustra-qspi:qspi-128-mbytes = " file://qspi-128-mbytes.cfg"

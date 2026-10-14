@@ -1,0 +1,5 @@
+&sdhci0 {
+	non-removable;
+	disable-wp;
+	bus-width = <8>;
+};

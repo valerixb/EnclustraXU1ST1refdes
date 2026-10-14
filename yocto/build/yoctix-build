@@ -1,0 +1,14 @@
+#!/bin/bash
+set -x # echo on
+SECONDS=0
+MACHINE=refdes-xu1-st1-xczu6eg bitbake xilinx-bootbin -c cleanall
+MACHINE=amd-cortexa53-common bitbake edf-linux-disk-image -c cleanall
+rm -rf ./sstate-cache
+rm -rf ./tmp
+rm -rf ./tmp-refdes-xu1-st1-cortexa53-fsbl
+rm -rf ./tmp-refdes-xu1-st1-microblaze-pmu
+#rm -rf ./tmp-refdes-xu1-st1-cortexr5-0-baremetal
+MACHINE=refdes-xu1-st1-xczu6eg bitbake xilinx-bootbin
+MACHINE=amd-cortexa53-common bitbake edf-linux-disk-image
+duration=$SECONDS
+TZ=UTC0 printf 'Yocto compile time was %(%H:%M:%S)T\n' "$duration"
